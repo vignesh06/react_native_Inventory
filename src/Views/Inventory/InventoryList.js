@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-native-elements';
+import { Button, Card, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
@@ -59,9 +59,16 @@ function InventoryList(props) {
       />
       <ScrollView >
         <Button
-          style={styles.buttonStyle} title={'Create Inventory'} onPress={() => props.navigation.navigate("CreateInventory")} />
+          icon={
+            <Icon
+              name="plus-square"
+              size={20}
+              color="white"
+            />
+          }
+          style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Inventory'} onPress={() => props.navigation.navigate("CreateInventory")} />
       </ScrollView>
-      <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>
+      {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>
         <Row data={state.tableHead} style={styles.head} textStyle={styles.text} />
         {
           inventoryData.map((rowData, index) => (
@@ -75,7 +82,40 @@ function InventoryList(props) {
             </TableWrapper>
           ))
         }
-      </Table>
+      </Table> */}
+      <ScrollView >
+        {
+          inventoryData.map((rowData, index) => (
+            <Card key={'row' + index}
+              title={rowData.name} onPress={() => viewInventoryDetails(rowData, index)}
+            >
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Text >{'Quantity : '}</Text><Text style={{ fontWeight: "bold" }}>{rowData.quantity}</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                <Text >{'Unit : '}</Text><Text style={{ fontWeight: "bold" }}>{rowData.unit}</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                <Text >{'Category : '}</Text><Text style={{ fontWeight: "bold" }}>{rowData.category}</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                <Text >{'Code : '}</Text><Text style={{ fontWeight: "bold" }}>{rowData.code}</Text>
+              </View>
+              <View>
+                <Button style={{ alignSelf: 'flex-end', marginTop: 10 }} onPress={() => viewInventoryDetails(rowData, index)} title={''}
+                  icon={
+                    <Icon
+                      name="arrow-circle-o-right"
+                      size={20}
+                      color="white"
+                    />
+                  }
+                ></Button>
+              </View>
+            </Card>
+          ))
+        }
+      </ScrollView>
     </ScrollView>
   );
 }

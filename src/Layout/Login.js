@@ -95,6 +95,7 @@ function Login(props) {
     let responsedata = await HTTPService(url, 'post', data)
     console.log("httpservicelogin account_id accountname password")
     console.log(responsedata)
+    if(responsedata){
     db.transaction(function (tx) {
       console.log("db open")
       tx.executeSql(
@@ -111,6 +112,7 @@ function Login(props) {
         }
       );
     });
+  }
   }
 
 

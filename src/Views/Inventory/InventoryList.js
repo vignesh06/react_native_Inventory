@@ -39,6 +39,33 @@ function InventoryList(props) {
       });
     });
   }
+
+  const logout = () => {
+    console.log("logout")
+    var userID;
+    db.transaction(tx => {
+      tx.executeSql('SELECT * FROM table_user', [], (tx, results) => {
+          for (let i = 0; i < results.rows.length; ++i) {
+              if(results.rows.item(i).is_active===1){
+                userID=results.rows.item(i).id
+                }
+          }
+          tx.executeSql(
+            'UPDATE table_user set is_active=? where id=?',
+            [0,userID],
+            (tx, results) => {
+                console.log('logout', results.rowsAffected);
+                if (results.rowsAffected > 0) {
+                    console.log('logout successful');
+                    props.navigation.navigate("Login");
+                } else {
+                    alert('logout Failed');
+                }
+            }
+        );
+      });
+  });
+  }
   const viewInventoryDetails = (inventoryData, index) => {
     console.log(`This is row ${index + 1}`);
     console.log('This is row', inventoryData);
@@ -58,6 +85,7 @@ function InventoryList(props) {
         onDidFocus={() => activate()}
       />
       <ScrollView >
+      <View style={{ flex: 1, flexDirection: 'row' }}>
         <Button
           icon={
             <Icon
@@ -67,6 +95,9 @@ function InventoryList(props) {
             />
           }
           style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Inventory'} onPress={() => props.navigation.navigate("CreateInventory")} />
+          <Button
+          style={{ alignSelf: 'flex-end', marginLeft:90}} title={' Logout'} onPress={() =>logout()} />
+          </View>
       </ScrollView>
       {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>
         <Row data={state.tableHead} style={styles.head} textStyle={styles.text} />

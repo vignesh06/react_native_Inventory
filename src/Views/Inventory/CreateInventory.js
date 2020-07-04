@@ -25,7 +25,9 @@ function Inventory(props) {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM table_user', [], (tx, results) => {
         for (let i = 0; i < results.rows.length; ++i) {
-          temp.push(results.rows.item(i));
+          if(results.rows.item(i).is_active===1){
+            temp.push(results.rows.item(i));
+          }
         }
         console.log('item:', results.rows.length);
         console.log('item:', temp[0].account_name);

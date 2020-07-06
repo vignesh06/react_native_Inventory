@@ -10,7 +10,7 @@ const HTTPService = async (url, method, data) => {
     return response.data;
     })
     .catch(function(apiError) {
-      alert(apiError);
+      alert("Invalid username or account name or password");
     });
     return response;
 };

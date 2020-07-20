@@ -33,7 +33,7 @@ function Login(props) {
             console.log('login page item:', res.rows.length);
             txn.executeSql('DROP TABLE IF EXISTS table_user', []);
             txn.executeSql(
-              'CREATE TABLE IF NOT EXISTS table_user(id INTEGER PRIMARY KEY AUTOINCREMENT, userid VARCHAR(255),emailid VARCHAR(255), account_name  VARCHAR(255), password  VARCHAR(255),is_active INTEGER)',
+              'CREATE TABLE IF NOT EXISTS table_user(id INTEGER PRIMARY KEY AUTOINCREMENT, userid VARCHAR(255),emailid VARCHAR(255), account_name  VARCHAR(255), password  VARCHAR(255),is_active INTEGER,address VARCHAR(255),longitude INTEGER,latitude INTEGER,code VARCHAR(255))',
               []
             );
           } else {
@@ -99,8 +99,8 @@ function Login(props) {
     db.transaction(function (tx) {
       console.log("db open")
       tx.executeSql(
-        'INSERT INTO table_user (userid,emailid, account_name, password,is_active) VALUES (?,?,?,?,?)',
-        [responsedata.account_id, username, accountname, password,1],
+        'INSERT INTO table_user (userid,emailid, account_name, password,is_active,address,longitude,latitude,code) VALUES (?,?,?,?,?,?,?,?,?)',
+        [responsedata.account_id, username, accountname, password,1,'',0,0,''],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {

@@ -72,7 +72,7 @@ function UpdateInventory(props) {
                 (tx, results) => {
                     console.log('Results', results.rowsAffected);
                     if (results.rowsAffected > 0) {
-                        console.log('invemtory successful');
+                        console.log('Updation successful');
                         props.navigation.navigate("InventoryList");
                     } else {
                         alert('Updation Failed');

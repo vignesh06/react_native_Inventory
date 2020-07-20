@@ -63,7 +63,7 @@ function Inventory(props) {
             console.log('invemtory successful');
             props.navigation.navigate("InventoryList");
           } else {
-            console.log('Registration Failed');
+            console.log('inventory Failed');
           }
         }
       );

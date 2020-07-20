@@ -4,10 +4,24 @@ import Login from './src/Layout/Login';
 import InventoryList from './src/Views/Inventory/InventoryList';
 import CreateInventory from './src/Views/Inventory/CreateInventory';
 import UpdateInventory from './src/Views/Inventory/UpdateInventory';
+import Scanner from './src/Views/BarCodeScanner/Scanner';
+import UserProfile from './src/Views/User/UserProfile';
 
 const navigator = createStackNavigator(
   {
     Login: Login,
+    Scanner: {
+      screen: Scanner,
+      navigationOptions: {
+        title: 'Scanner',
+      },
+    },
+    UserProfile: {
+      screen: UserProfile,
+      navigationOptions: {
+        title: 'Profile',
+      },
+    },
     CreateInventory: {
       screen: CreateInventory,
       navigationOptions: {

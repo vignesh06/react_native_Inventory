@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView,Dimensions} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { NavigationEvents } from 'react-navigation';
 import * as SQLite from 'expo-sqlite';
@@ -9,13 +9,13 @@ const db = SQLite.openDatabase("InventoryDatabase.db");
 var Data = {
   tableHead: ['name', 'category', 'unit', 'quantity', 'code', 'Action'],
 }
-
 function InventoryList(props) {
   const [inventoryData, setinventoryData] = useState([]);
 
   useEffect(() => {
     activate()
   }, []);
+
 
   const activate = () => {
     console.log("inventory httpservice")
@@ -66,6 +66,7 @@ function InventoryList(props) {
       });
   });
   }
+
   const viewInventoryDetails = (inventoryData, index) => {
     console.log(`This is row ${index + 1}`);
     console.log('This is row', inventoryData);
@@ -84,7 +85,9 @@ function InventoryList(props) {
       <NavigationEvents
         onDidFocus={() => activate()}
       />
+
       <ScrollView >
+      {/* <Text> {Dimensions.get('window').height}</Text> */}
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <Button
           icon={
@@ -95,6 +98,8 @@ function InventoryList(props) {
             />
           }
           style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Inventory'} onPress={() => props.navigation.navigate("CreateInventory")} />
+          <Button
+          style={{marginLeft:20}} title={' Profile'} onPress={() =>props.navigation.navigate("UserProfile")} />
           <Button
           style={{ alignSelf: 'flex-end', marginLeft:90}} title={' Logout'} onPress={() =>logout()} />
           </View>
@@ -164,4 +169,5 @@ const styles = StyleSheet.create({
     right: 0
   }
 });
+
 export default InventoryList;

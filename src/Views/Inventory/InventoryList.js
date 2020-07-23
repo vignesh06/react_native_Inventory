@@ -29,6 +29,16 @@ function InventoryList(props) {
             'CREATE TABLE IF NOT EXISTS table_inventorylist(id INTEGER PRIMARY KEY AUTOINCREMENT, name  VARCHAR(255),category VARCHAR(255), unit  VARCHAR(255), description  VARCHAR(255),quantity  VARCHAR(255),make VARCHAR(255),note VARCHAR(255),created_date  VARCHAR(255),created_by VARCHAR(255),updated_by VARCHAR(255),updated_date  VARCHAR(255),status VARCHAR(255),code  VARCHAR(255))',
             []
           );
+          tx.executeSql('DROP TABLE IF EXISTS table_recipelist', []);
+          tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS table_recipelist(id INTEGER PRIMARY KEY AUTOINCREMENT, recipename  VARCHAR(255), origin  VARCHAR(255), recipetype  VARCHAR(255), category  VARCHAR(255), difficultylevel  VARCHAR(255),servings INTEGER,intruction TEXT,note TEXT,hours INTEGER)',
+            []
+          );
+          tx.executeSql('DROP TABLE IF EXISTS table_ingredientlist', []);
+          tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS table_ingredientlist(id INTEGER PRIMARY KEY AUTOINCREMENT,recipe_id INTEGER, name  VARCHAR(255), quantity  VARCHAR(255), FOREIGN KEY (recipe_id) REFERENCES table_recipelist(id))',
+            []
+          );
         } else {
           var temp = [];
           for (let i = 0; i < results.rows.length; ++i) {
@@ -102,6 +112,17 @@ function InventoryList(props) {
           style={{marginLeft:20}} title={' Profile'} onPress={() =>props.navigation.navigate("UserProfile")} />
           <Button
           style={{ alignSelf: 'flex-end', marginLeft:90}} title={' Logout'} onPress={() =>logout()} />
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+        <Button
+          icon={
+            <Icon
+              name="plus-square"
+              size={20}
+              color="white"
+            />
+          }
+          style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Recipe'} onPress={() => props.navigation.navigate("CreateRecipe")} />
           </View>
       </ScrollView>
       {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>

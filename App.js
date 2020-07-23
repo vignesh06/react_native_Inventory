@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './src/Layout/Login';
 import InventoryList from './src/Views/Inventory/InventoryList';
 import CreateInventory from './src/Views/Inventory/CreateInventory';
+import CreateRecipe from './src/Views/Recipe/CreateRecipe';
 import UpdateInventory from './src/Views/Inventory/UpdateInventory';
 import Scanner from './src/Views/BarCodeScanner/Scanner';
 import UserProfile from './src/Views/User/UserProfile';
@@ -26,6 +27,12 @@ const navigator = createStackNavigator(
       screen: CreateInventory,
       navigationOptions: {
         title: 'Create Inventory',
+      },
+    },
+    CreateRecipe: {
+      screen: CreateRecipe,
+      navigationOptions: {
+        title: 'Create Recipe',
       },
     },
     UpdateInventory: {

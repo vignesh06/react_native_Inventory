@@ -4,11 +4,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, ScrollView,Dimensions} from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { NavigationEvents } from 'react-navigation';
+import {dropDownConstants} from '../../Constants/Constants';
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase("InventoryDatabase.db");
+var recipeObject;
 var Data = {
   tableHead: ['name', 'category', 'unit', 'quantity', 'code', 'Action'],
 }
+
 function InventoryList(props) {
   const [inventoryData, setinventoryData] = useState([]);
 
@@ -18,6 +21,18 @@ function InventoryList(props) {
 
 
   const activate = () => {
+    recipeObject={
+      "recipeName":"",
+      "recipeType":"",
+      "origin":"",
+      "recipeCategory":"",
+      "difficultylLevel":"",
+      "numofServings":"",
+      "instructions":"",
+      "note":"",
+      "hours":"",
+      "IngredientList":[]
+    }
     console.log("inventory httpservice")
     db.transaction(tx => {
       console.log("inventory db httpservice")
@@ -36,8 +51,42 @@ function InventoryList(props) {
           );
           tx.executeSql('DROP TABLE IF EXISTS table_ingredientlist', []);
           tx.executeSql(
-            'CREATE TABLE IF NOT EXISTS table_ingredientlist(id INTEGER PRIMARY KEY AUTOINCREMENT,recipe_id INTEGER, name  VARCHAR(255), quantity  VARCHAR(255), FOREIGN KEY (recipe_id) REFERENCES table_recipelist(id))',
+            'CREATE TABLE IF NOT EXISTS table_ingredientlist(id INTEGER PRIMARY KEY AUTOINCREMENT, name  VARCHAR(255),isSeasonal INTEGER,unit VARCHAR(255))',
             []
+          );
+          tx.executeSql('DROP TABLE IF EXISTS table_ingredientrecipe', []);
+          tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS table_ingredientrecipe(id INTEGER PRIMARY KEY AUTOINCREMENT,recipe_id INTEGER,ingredient_id INTEGER,quantity  VARCHAR(255), FOREIGN KEY (recipe_id) REFERENCES table_recipelist(id), FOREIGN KEY (ingredient_id) REFERENCES table_ingredientlist(id))',
+            []
+          );
+          let queryString = ''
+          let querydata = [];
+          let list = dropDownConstants.ingredient
+          for (let i = 0; i < list.length; i++) {
+            if (i == 0) {
+              queryString = 'INSERT INTO table_ingredientlist (name,isSeasonal,unit) VALUES (?,?,?)'
+              querydata.push(list[i].text)
+              querydata.push(list[i].isSeasonal)
+              querydata.push(list[i].unit)
+            } else {
+              queryString = queryString + ',(?,?,?)'
+              querydata.push(list[i].text)
+              querydata.push(list[i].isSeasonal)
+              querydata.push(list[i].unit)
+            }
+          }
+          tx.executeSql(
+            queryString,
+            querydata,
+            (tx, results) => {
+              console.log('second Results', results.rowsAffected);
+              console.log('Results', results);
+              if (results.rowsAffected > 0) {
+                console.log('Insert success');
+              } else {
+                console.log('Insert failed');
+              }
+            }
           );
         } else {
           var temp = [];
@@ -122,7 +171,7 @@ function InventoryList(props) {
               color="white"
             />
           }
-          style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Recipe'} onPress={() => props.navigation.navigate("CreateRecipe")} />
+          style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Recipe'} onPress={() => props.navigation.navigate("CreateRecipe",{recipeObject: recipeObject})} />
           </View>
       </ScrollView>
       {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>

@@ -4,6 +4,8 @@ import Login from './src/Layout/Login';
 import InventoryList from './src/Views/Inventory/InventoryList';
 import CreateInventory from './src/Views/Inventory/CreateInventory';
 import CreateRecipe from './src/Views/Recipe/CreateRecipe';
+import AssociateIngredientToRecipe from './src/Views/Recipe/AssociateIngredientToRecipe';
+import AssociatedIngredientList from './src/Views/Recipe/AssociatedIngredientList';
 import UpdateInventory from './src/Views/Inventory/UpdateInventory';
 import Scanner from './src/Views/BarCodeScanner/Scanner';
 import UserProfile from './src/Views/User/UserProfile';
@@ -21,6 +23,20 @@ const navigator = createStackNavigator(
       screen: UserProfile,
       navigationOptions: {
         title: 'Profile',
+      },
+    },
+    AssociateIngredientToRecipe: {
+      screen: AssociateIngredientToRecipe,
+      navigationOptions: {
+        title: 'Associate Ingredient',
+        headerLeft: null
+      },
+    },
+    AssociatedIngredientList: {
+      screen: AssociatedIngredientList,
+      navigationOptions: {
+        title: 'Ingredients List',
+        headerLeft: null
       },
     },
     CreateInventory: {

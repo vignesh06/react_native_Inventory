@@ -13,6 +13,6 @@ export const dropDownConstants = {
     difficultylLevel: [{ text: 'Easy', value: 'Easy' }, { text: 'Difficult', value: 'difficult' }, { text: 'Tough', value: 'tough' }],
     recipeCategory: [{ text: 'Veg', value: 'Veg' }, { text: 'Jain', value: 'Jain' }, { text: 'Vegan', value: 'Vegan' },{ text: 'Non Veg', value: 'Non Veg' }],
     recipeType: [{ text: 'Snacks', value: 'snacks' }, { text: 'Main Dish', value: 'main dish' }, { text: 'Rice', value: 'rice' }],
-    ingredient: [{ text: 'Onion', value: 'Onion' }, { text: 'Tomato', value: 'Tomato' }, { text: 'Potato', value: 'Potato' }],
+    ingredient: [{ text: 'Onion', value: 'Onion',isSeasonal:1,unit:"KG" }, { text: 'Tomato', value: 'Tomato',isSeasonal:1,unit:"Piece" }, { text: 'Potato', value: 'Potato',isSeasonal:0,unit:"KG" }],
 }
 

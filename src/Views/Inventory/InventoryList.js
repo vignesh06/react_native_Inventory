@@ -172,6 +172,8 @@ function InventoryList(props) {
             />
           }
           style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Recipe'} onPress={() => props.navigation.navigate("CreateRecipe",{recipeObject: recipeObject})} />
+          <Button
+          style={{marginLeft:20}} title={' Recipe List'} onPress={() =>props.navigation.navigate("RecipeList")} />
           </View>
       </ScrollView>
       {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>

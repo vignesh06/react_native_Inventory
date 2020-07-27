@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     fontSize: 18,
-    width: "80%"
+    width: "80%",
+    marginLeft: 5
   },
 });
 

@@ -59,6 +59,11 @@ function InventoryList(props) {
             'CREATE TABLE IF NOT EXISTS table_ingredientrecipe(id INTEGER PRIMARY KEY AUTOINCREMENT,recipe_id INTEGER,ingredient_id INTEGER,quantity  VARCHAR(255), FOREIGN KEY (recipe_id) REFERENCES table_recipelist(id), FOREIGN KEY (ingredient_id) REFERENCES table_ingredientlist(id))',
             []
           );
+          tx.executeSql('DROP TABLE IF EXISTS table_cart', []);
+          tx.executeSql(
+              'CREATE TABLE IF NOT EXISTS table_cart(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255),count INTEGER)',
+              []
+          );
           let queryString = ''
           let querydata = [];
           let list = dropDownConstants.ingredient
@@ -89,6 +94,7 @@ function InventoryList(props) {
             }
           );
         } else {
+      
           var temp = [];
           for (let i = 0; i < results.rows.length; ++i) {
             temp.push(results.rows.item(i));
@@ -174,6 +180,10 @@ function InventoryList(props) {
           style={{ alignSelf: 'flex-start', marginLeft: 12 }} title={' Create Recipe'} onPress={() => props.navigation.navigate("CreateRecipe",{recipeObject: recipeObject})} />
           <Button
           style={{marginLeft:20}} title={' Recipe List'} onPress={() =>props.navigation.navigate("RecipeList")} />
+          </View>
+          <View style={{ flex: 1,marginTop: 10, flexDirection: 'row' }}>
+          <Button
+          style={{marginLeft:20}} title={' Material Purchase'} onPress={() =>props.navigation.navigate("MaterialPurchase")} />
           </View>
       </ScrollView>
       {/* <Table borderStyle={{ borderColor: 'transparent' }} borderStyle={{ borderWidth: 1 }}>

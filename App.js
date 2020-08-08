@@ -8,6 +8,8 @@ import RecipeList from './src/Views/Recipe/RecipeList';
 import AssociateIngredientToRecipe from './src/Views/Recipe/AssociateIngredientToRecipe';
 import AssociatedIngredientList from './src/Views/Recipe/AssociatedIngredientList';
 import UpdateInventory from './src/Views/Inventory/UpdateInventory';
+import MaterialPurchase from './src/Views/cart/MaterialPurchase';
+import Cart from './src/Views/cart/Cart';
 import Scanner from './src/Views/BarCodeScanner/Scanner';
 import UserProfile from './src/Views/User/UserProfile';
 
@@ -37,6 +39,19 @@ const navigator = createStackNavigator(
       screen: AssociatedIngredientList,
       navigationOptions: {
         title: 'Ingredients List',
+        headerLeft: null
+      },
+    },
+    MaterialPurchase: {
+      screen: MaterialPurchase,
+      navigationOptions: {
+        title: 'Material Purchase',
+      },
+    },
+    Cart: {
+      screen: Cart,
+      navigationOptions: {
+        title: 'Cart',
         headerLeft: null
       },
     },

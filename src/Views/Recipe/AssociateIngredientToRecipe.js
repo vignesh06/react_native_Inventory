@@ -19,7 +19,7 @@ const AssociateIngredientToRecipe = props => {
 
   const addtoIngredientList = () => {
     recipeObject.IngredientList.push({ "name": ingredient, "quantity": quantity, "unit": unit, "id": id })
-    props.navigation.navigate("CreateRecipe", { recipeObject: recipeObject });
+    props.navigation.navigate(props.navigation.getParam('screeName'), { recipeObject: recipeObject,isNaviagtedFromRecipePage:false});
   }
 
   const selectedIngredient = (value) => {
@@ -38,7 +38,7 @@ const AssociateIngredientToRecipe = props => {
     }
   }
   const navigateToRecipePage = () => {
-    props.navigation.navigate("CreateRecipe", { recipeObject: recipeObject });
+    props.navigation.navigate(props.navigation.getParam('screeName'), { recipeObject: recipeObject });
   }
 
   useEffect(() => {

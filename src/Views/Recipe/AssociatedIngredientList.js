@@ -13,7 +13,7 @@ const AssociatedIngredientList = props => {
 
     const navigateToRecipePage = () => {
         recipeObject.IngredientList=ingredientList;
-        props.navigation.navigate("CreateRecipe", {recipeObject: recipeObject});
+        props.navigation.navigate(props.navigation.getParam('screeName'), {recipeObject: recipeObject,isNaviagtedFromRecipePage:false});
     }
     const deleteIngredientFromList = (index) => {
         let tempIngredientList = ingredientList

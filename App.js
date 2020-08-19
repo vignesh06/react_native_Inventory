@@ -4,6 +4,7 @@ import Login from './src/Layout/Login';
 import InventoryList from './src/Views/Inventory/InventoryList';
 import CreateInventory from './src/Views/Inventory/CreateInventory';
 import CreateRecipe from './src/Views/Recipe/CreateRecipe';
+import UpdateRecipe from './src/Views/Recipe/UpdateRecipe';
 import RecipeList from './src/Views/Recipe/RecipeList';
 import AssociateIngredientToRecipe from './src/Views/Recipe/AssociateIngredientToRecipe';
 import AssociatedIngredientList from './src/Views/Recipe/AssociatedIngredientList';
@@ -65,6 +66,12 @@ const navigator = createStackNavigator(
       screen: CreateRecipe,
       navigationOptions: {
         title: 'Create Recipe',
+      },
+    },
+    UpdateRecipe: {
+      screen: UpdateRecipe,
+      navigationOptions: {
+        title: 'Update Recipe',
       },
     },
     UpdateInventory: {

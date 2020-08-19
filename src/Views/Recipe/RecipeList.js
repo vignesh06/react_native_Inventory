@@ -37,7 +37,7 @@ function RecipeList(props) {
   const viewReciepDetails = (recipe, index) => {
     console.log(`This is row ${index + 1}`);
     console.log('This is row', recipe);
-    // props.navigation.navigate('UpdateInventory', { inventoryData: inventoryData });
+    props.navigation.navigate('UpdateRecipe', { recipe: recipe,isNaviagtedFromRecipePage:true});
   }
 
   return (

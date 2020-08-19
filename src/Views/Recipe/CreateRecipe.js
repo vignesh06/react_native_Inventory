@@ -89,9 +89,9 @@ function CreateRecipe(props) {
                 querydata.push(list[i].id)
               } else {
                 queryString = queryString + ',(?,?,?)'
-                querydata.push(list[i].ingredient)
                 querydata.push(list[i].quantity)
                 querydata.push(results.insertId)
+                querydata.push(list[i].id)
               }
             }
             txn.executeSql(
@@ -129,7 +129,7 @@ function CreateRecipe(props) {
       "hours":hours,
       "IngredientList":IngredientList
     }
-    props.navigation.navigate(screen, {recipeObject: recipeObject});
+    props.navigation.navigate(screen, {recipeObject: recipeObject,screeName:"CreateRecipe"});
   }
 
 
